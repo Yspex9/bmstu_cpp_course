@@ -1,10 +1,18 @@
+#include <stdlib.h>
+#include <limits.h>
 #include <assert.h>
-#include "str2int.h"
-
 
 int str2int(const char *str) {
-    if (*str == '-') {
-        assert(1 == 0);
-    }
-    return 0;
+  char *endptr;
+  long result = strtol(str, &endptr, 10);
+
+  if (*str == '\0' || *endptr != '\0') {
+    assert(0);
+  }
+
+  if (result < INT_MIN || result > INT_MAX) {
+    assert(0);
+  }
+
+  return (int)result;
 }
